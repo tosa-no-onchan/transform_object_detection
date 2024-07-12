@@ -8,7 +8,7 @@
 
   上記、雑草画像を、YOLO annotaion にする。  
   labelImg で、YOLO形式のアノテーションにする。  
-  class id and Name  0:zasou  
+  class id and Name  0:"zasou"  
 
   YOLO annotation から、COCO huggingface metadata の JSONL file を作成する。  
   $ python yolo2huggingface_metadata.py  
