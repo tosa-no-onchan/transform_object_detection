@@ -16,3 +16,6 @@
 
   雑草データセットでの学習  
   zasou_train.ipynb 
+
+元の記事  
+  [Transformers Object detection を試す。](http://www.netosa.com/blog/2024/07/transformers-object-detection.html)  
