@@ -14,11 +14,18 @@
   $ python yolo2huggingface_metadata.py  
   ./datasets/train/zasou/metadata.jsonl  
 
-  雑草データセットでの学習  
+##### 雑草データセットでの学習  
   zasou_train.ipynb 　
 
-  検証  
+##### 検証  
   zasou_Inference.ipynb  
+  
+##### 雑草　3class 学習  
+  入力画像を、 480x480 にリサイズして、余白には、黒(0,0,0) を埋め込みます。  
+  zasou_train_3class_ex.ipynb  
+
+####  雑草　3class 検証  
+  zasou_Inference2_ex.ipynb
 
 元の記事  
   [Transformers Object detection - detr の転移学習とONNX変換と実行。](http://www.netosa.com/blog/2024/07/transformers-object-detection.html)  
