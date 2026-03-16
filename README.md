@@ -21,4 +21,5 @@
   zasou_Inference.ipynb  
 
 元の記事  
-  [Transformers Object detection を試す。](http://www.netosa.com/blog/2024/07/transformers-object-detection.html)  
+  [Transformers Object detection - detr の転移学習とONNX変換と実行。](http://www.netosa.com/blog/2024/07/transformers-object-detection.html)  
+  [Transformers Object detection - detr の転移学習とONNX変換と実行。#2](https://www.netosa.com/blog/2026/03/transformers-object-detection---detr-onnx2.html)  
