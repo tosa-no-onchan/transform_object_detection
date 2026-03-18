@@ -336,8 +336,8 @@ if __name__ == "__main__":
         exit(ret)
 
     USE_TEST1=False
-    USE_CAMERA=False
-    USE_TEST2=True
+    USE_CAMERA=True
+    USE_TEST2=False
 
     if USE_TEST1:
         # 3. ダミー入力データの作成 
