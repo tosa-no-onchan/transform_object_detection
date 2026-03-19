@@ -14,17 +14,26 @@
   $ python yolo2huggingface_metadata.py  
   ./datasets/train/zasou/metadata.jsonl  
 
-##### 雑草データセットでの学習  
+##### 1. 雑草データセットでの学習  
   zasou_train.ipynb 　
 
-##### 検証  
+##### 2. 検証  
   zasou_Inference.ipynb  
   
-##### 雑草　3class 学習  
-  入力画像を、 アスペクト比をそのままに、480x480 にリサイズして、余白には、黒(0,0,0) を埋め込みます。  
+##### 3. 雑草　3class 学習  最新版なので、こちらを使って!! by nishi 2026.3.19  
+  i) 入力画像を、 アスペクト比をそのままに、480x480 にリサイズして、余白には、黒(0,0,0) を埋め込みます。  
+  ii) def transform_aug_ann(examples) のバグも改修しています。  
+  iii) input size 480x480 にしています。  
+````
+    image_processor = AutoImageProcessor.from_pretrained(  
+      img_checkpoint,   
+      size={"shortest_edge": 480, "longest_edge": 1333},  
+      use_fast=False # 必要に応じて  
+    )  
+````
   zasou_train_3class.ipynb  
 
-####  雑草　3class 検証  
+####  4. 雑草　3class 検証  
   zasou_Inference2_ex.ipynb
 
 元の記事  
