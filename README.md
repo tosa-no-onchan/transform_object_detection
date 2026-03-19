@@ -14,10 +14,10 @@
   $ python yolo2huggingface_metadata.py  
   ./datasets/train/zasou/metadata.jsonl  
 
-##### 1. 雑草データセットでの学習  
+##### 1. 雑草データセットでの学習(旧版)  
   zasou_train.ipynb 　
 
-##### 2. 検証  
+##### 2. 検証(旧版)  
   zasou_Inference.ipynb  
   
 ##### 3. 雑草　3class 学習  最新版なので、こちらを使って!! by nishi 2026.3.19  
