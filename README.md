@@ -22,7 +22,7 @@
   
 ##### 雑草　3class 学習  
   入力画像を、 アスペクト比をそのままに、480x480 にリサイズして、余白には、黒(0,0,0) を埋め込みます。  
-  zasou_train_3class_ex.ipynb  
+  zasou_train_3class.ipynb  
 
 ####  雑草　3class 検証  
   zasou_Inference2_ex.ipynb
