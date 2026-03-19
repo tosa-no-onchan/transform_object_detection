@@ -1,4 +1,4 @@
-#### transform_object_detection  
+### transform_object_detection  
   Hugging Face detr (object detection transformer)  
   [Transformers Object Detection](https://huggingface.co/docs/transformers/v4.42.0/ja/tasks/object_detection) を参考に、雑草データセットを転移学習させてみた。    
 
@@ -14,15 +14,63 @@
   $ python yolo2huggingface_metadata.py  
   ./datasets/train/zasou/metadata.jsonl  
 
-##### 1. 雑草データセットでの学習(旧版)  
+#### 1. 雑草データセットでの学習(旧版)  
   zasou_train.ipynb 　
 
-##### 2. 検証(旧版)  
+#### 2. 検証(旧版)  
   zasou_Inference.ipynb  
   
-##### 3. 雑草　3class 学習  最新版なので、こちらを使って!! by nishi 2026.3.19  
+#### 3. 雑草　3class 学習  最新版なので、こちらを使って!! by nishi 2026.3.19  
+  zasou_train_3class.ipynb  
+
   i) 入力画像を、 アスペクト比をそのままに、480x480 にリサイズして、余白には、黒(0,0,0) を埋め込みます。  
+````
+USE_ASPECT_FIX=True
+if USE_ASPECT_FIX:
+    # アスペクト比を維持させる
+    transform = albumentations.Compose(
+        [
+            # 1. アスペクト比を維持し、長い方の辺を480ピクセルに合わせる
+            albumentations.LongestMaxSize(max_size=480),
+            # 2. 足りない部分を黒（0）で埋めて 480x480 に固定する
+            albumentations.PadIfNeeded(
+                min_height=480, 
+                min_width=480, 
+                border_mode=0, # 定数（黒）で埋める
+                #value=(0, 0, 0)
+                fill=0  # 'value' を 'fill' に変更（黒にする場合は 0 または [0, 0, 0]）
+            ),
+            # 3. その他のデータ拡張
+            albumentations.HorizontalFlip(p=0.5),
+        ],
+        # bboxもパディングに合わせて自動で座標調整されます
+        bbox_params=albumentations.BboxParams(format="coco", label_fields=["category"]),
+    )
+````
+  
   ii) def transform_aug_ann(examples) のバグも改修しています。  
+````
+def transform_aug_ann(examples):
+    image_ids = examples["image_id"]
+    images, bboxes, area, categories = [], [], [], []
+    for image, objects in zip(examples["image"], examples["objects"]):
+        #image = np.array(image.convert("RGB"))[:, :, ::-1]   # NG
+        # 1. RGBのままNumPy化（[::-1] は削除！）
+        image_np = np.array(image.convert("RGB"))
+        # 2. Albumentations実行 (480x480にパディング)
+        out = transform(image=image_np, bboxes=objects["bbox"], category=objects["category"])
+        area.append(objects["area"])
+        images.append(out["image"])    # リストに追加
+        bboxes.append(out["bboxes"])
+        categories.append(out["category"])
+    targets = [
+        {"image_id": id_, "annotations": formatted_anns(id_, cat_, ar_, box_)}
+        for id_, cat_, ar_, box_ in zip(image_ids, categories, area, bboxes)
+    ]
+    # 3. images(リスト)を渡し、size指定は定義時のものが使われるため省略可
+    return image_processor(images=images, annotations=targets, return_tensors="pt")
+
+````
   iii) input size 480x480 にしています。  
 ````
     image_processor = AutoImageProcessor.from_pretrained(  
@@ -31,7 +79,6 @@
       use_fast=False # 必要に応じて  
     )  
 ````
-  zasou_train_3class.ipynb  
 
 ####  4. 雑草　3class 検証  
   zasou_Inference2_ex.ipynb
