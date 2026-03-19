@@ -98,6 +98,9 @@ def transform_aug_ann(examples):
 #### 9. onnx -&gt; rknn 変換  
   (rknn_env310) $ python convert_dtr_onnx2rknn.py  
 
+#### 10. Orange pi 5 Ambian(22.04) で、rknn モデルの実行。  
+  (rknn_env) $ python detr_rknn_3class_ex_test.py  
+  
 
 元の記事  
   [Transformers Object detection - detr の転移学習とONNX変換と実行。](http://www.netosa.com/blog/2024/07/transformers-object-detection.html)  
