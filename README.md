@@ -80,8 +80,21 @@ def transform_aug_ann(examples):
     )  
 ````
 
-####  4. 雑草　3class 検証  
+#### 4. 雑草　3class 検証  
   zasou_Inference2_ex.ipynb
+
+#### 5. YOLO アノテーション to metadata.jsonl  
+  $ python yolo2huggingface_metadata2.py
+
+#### 6. torch 転移学習済モデルを onnx に変換  
+  $ python zasou_dtr2onnx.py  
+
+#### 7. onnx のスリム化と入力サイズの Fix  
+  $ onnxsim detr_zasou_480.onnx detr_zasou_480_sim.onnx --overwrite-input-shape pixel_values:1,3,480,480  
+
+#### 8. onnx -&gt; rknn 変換  
+  (rknn_env310) $ python convert_dtr_onnx2rknn.py  
+
 
 元の記事  
   [Transformers Object detection - detr の転移学習とONNX変換と実行。](http://www.netosa.com/blog/2024/07/transformers-object-detection.html)  
