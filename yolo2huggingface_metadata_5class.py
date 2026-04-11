@@ -1,5 +1,5 @@
 """
-yolo2huggingface_metadata2.py
+yolo2huggingface_metadata_5class.py
 
 YOLO annotations are convert to COCO huggingface metadata and saved as a JSONL file in the output directory.
 
@@ -74,10 +74,10 @@ img_dirs = ['雑草','樹木','庭の鉢植えの植物']
 img_sub_paths = ['zasou','tree','potted_plant']
 
 # Define the categories for the COCO dataset
-categories = [{"id": 0, "name": "zasou"},
-              {"id": 1, "name": "tree"},
-              {"id": 2, "name": "potted_plant"}
-              ]
+#categories = [{"id": 0, "name": "zasou"},
+#              {"id": 1, "name": "tree"},
+#              {"id": 2, "name": "potted_plant"}
+#              ]
 
 metadata=[]
 
@@ -157,6 +157,11 @@ for img_dir,img_sub_path in zip(img_dirs,img_sub_paths):
 
 #for s in metadata[:5]:
 #    print("s:", s)
+
+
+# フォルダを作成（存在する場合は無視する）
+dist_folder=os.path.join(output_dir,'train')
+os.makedirs(dist_folder, exist_ok=True)
 
 if True:
     # Save the huggingface metadata to a JSONL file
