@@ -20,9 +20,11 @@
 #### 2. 検証(旧版)  
   zasou_Inference.ipynb  
   
-#### 3. 雑草　3class 学習  最新版なので、こちらを使って!! by nishi 2026.3.19  
-  zasou_train_3class.ipynb  
-
+#### 3. 雑草　5class 学習  最新版なので、こちらを使って!! by nishi 2026.4.11  
+  zasou_train_5class_ex.ipynb  
+  
+  class_name=['none','zasou', 'tree', 'potted_plant','zasou_cluster']  
+  class_id=0 -&gt; none background ゴミ  
   i) 入力画像を、 アスペクト比をそのままに、480x480 にリサイズして、余白には、黒(0,0,0) を埋め込みます。  
 ````
 USE_ASPECT_FIX=True
